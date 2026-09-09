@@ -5,9 +5,10 @@ const SUPABASE_URL =
 "https://tmfbecurjogbafxnnql.supabase.co";
 
 
-// Pega aquí la clave ANON PUBLIC de Supabase
+// Clave anon public de Supabase
+
 const SUPABASE_KEY = 
-"AQUI_VA_TU_ANON_KEY";
+"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRtZmJlY3VybGpvZ2JhZnhubnFsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODg5MjAzMzMsImV4cCI6MjEwNDQ5NjMzM30.jiVjxdm0AQCtmReQofkKD4n5aHU6Y84ONup6g8MuupA";
 
 
 
@@ -18,7 +19,7 @@ const supabaseClient = supabase.createClient(
 
 
 
-// Login administrador
+// Inicio de sesión administrador
 
 async function login(){
 
@@ -39,7 +40,7 @@ async function login(){
 
 
 
-    const { data, error } = await supabaseClient.auth.signInWithPassword({
+    const {data, error} = await supabaseClient.auth.signInWithPassword({
 
         email: email,
 
@@ -64,13 +65,16 @@ async function login(){
     mensaje.innerHTML = "Ingreso correcto";
 
 
-    document.querySelector(".card").style.display = "none";
+    document.querySelector(".card").style.display="none";
 
 
-    document.getElementById("panel").style.display = "block";
+    document.getElementById("panel").style.display="block";
 
 
-    console.log("Usuario conectado", data.user);
+    console.log(
+        "Administrador conectado:",
+        data.user
+    );
 
 
 }
