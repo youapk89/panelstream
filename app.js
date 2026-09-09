@@ -9,74 +9,91 @@ const SUPABASE_KEY =
 "sb_publishable_13TqMbS-zCkJIOyVIf06xw_pUgwTGNs";
 
 
+// Crear conexión
+
 const supabaseClient = supabase.createClient(
-SUPABASE_URL,
-SUPABASE_KEY
+    SUPABASE_URL,
+    SUPABASE_KEY
 );
 
 
-// ÚNICO ADMINISTRADOR
+// Único usuario administrador permitido
 
 const ADMIN_EMAIL = "josimar8999@gmail.com";
 
 
 
-// LOGIN
+// Función de ingreso
 
 async function login(){
 
 
-let email = document.getElementById("email").value;
-
-let password = document.getElementById("password").value;
-
-
-let mensaje = document.getElementById("mensaje");
-
+    const email = document
+    .getElementById("email")
+    .value
+    .trim()
+    .toLowerCase();
 
 
-if(email !== ADMIN_EMAIL){
+    const password = document
+    .getElementById("password")
+    .value;
 
-mensaje.innerHTML = "Usuario no autorizado";
 
-return;
-
-}
+    const mensaje = document
+    .getElementById("mensaje");
 
 
 
-const {data,error} = await supabaseClient.auth.signInWithPassword({
+    // Validar administrador
 
-email: email,
+    if(email !== ADMIN_EMAIL){
 
-password: password
+        mensaje.innerHTML = "Usuario no autorizado";
 
-});
+        return;
 
-
-
-if(error){
-
-mensaje.innerHTML = error.message;
-
-return;
-
-}
+    }
 
 
 
-mensaje.innerHTML = "Ingreso correcto";
+    // Iniciar sesión en Supabase
+
+    const { data, error } = await supabaseClient.auth.signInWithPassword({
+
+        email: email,
+
+        password: password
+
+    });
 
 
-document.querySelector(".card").style.display="none";
+
+    if(error){
+
+        mensaje.innerHTML = error.message;
+
+        return;
+
+    }
 
 
-document.getElementById("panel").style.display="block";
+
+    // Login correcto
+
+    mensaje.innerHTML = "Ingreso correcto";
 
 
+    document.querySelector(".card").style.display = "none";
 
-console.log("Administrador conectado", data.user);
 
+    document.getElementById("panel").style.display = "block";
+
+
+    console.log(
+        "Administrador conectado:",
+        data.user
+    );
 
 
 }
