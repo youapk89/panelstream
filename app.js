@@ -9,7 +9,6 @@ const SUPABASE_KEY =
 "sb_publishable_13TqMbS-zCkJIOyVIf06xw_pUgwTGNs";
 
 
-// Crear conexión
 
 const supabaseClient = supabase.createClient(
     SUPABASE_URL,
@@ -17,13 +16,8 @@ const supabaseClient = supabase.createClient(
 );
 
 
-// Único usuario administrador permitido
 
-const ADMIN_EMAIL = "josimar8999@gmail.com";
-
-
-
-// Función de ingreso
+// Login administrador
 
 async function login(){
 
@@ -31,8 +25,7 @@ async function login(){
     const email = document
     .getElementById("email")
     .value
-    .trim()
-    .toLowerCase();
+    .trim();
 
 
     const password = document
@@ -45,11 +38,9 @@ async function login(){
 
 
 
-    // Validar administrador
+    if(!email || !password){
 
-    if(email !== ADMIN_EMAIL){
-
-        mensaje.innerHTML = "Usuario no autorizado";
+        mensaje.innerHTML = "Complete todos los campos";
 
         return;
 
@@ -57,9 +48,7 @@ async function login(){
 
 
 
-    // Iniciar sesión en Supabase
-
-    const { data, error } = await supabaseClient.auth.signInWithPassword({
+    const {data, error} = await supabaseClient.auth.signInWithPassword({
 
         email: email,
 
@@ -79,21 +68,17 @@ async function login(){
 
 
 
-    // Login correcto
-
     mensaje.innerHTML = "Ingreso correcto";
 
 
-    document.querySelector(".card").style.display = "none";
+    document.querySelector(".card").style.display="none";
 
 
-    document.getElementById("panel").style.display = "block";
+    document.getElementById("panel").style.display="block";
 
 
-    console.log(
-        "Administrador conectado:",
-        data.user
-    );
+    console.log("Usuario conectado:", data.user);
+
 
 
 }
