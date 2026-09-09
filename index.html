@@ -3,10 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>PanelStream</title>
+
 <link rel="stylesheet" href="style.css">
 
+<!-- Librería Supabase -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 </head>
 
 <body>
@@ -14,57 +18,42 @@
 <div class="app">
 
 <h1>PanelStream</h1>
+
 <p>Control de clientes, servicios y vencimientos</p>
 
-<div class="card" id="loginBox">
 
-<h2>Acceso administrador</h2>
+<div class="card">
 
-<input id="email" type="email" placeholder="Correo">
+<h2>Ingreso administrador</h2>
+
+<input id="email" type="email" placeholder="Correo administrador">
+
 <input id="password" type="password" placeholder="Contraseña">
 
-<button onclick="entrar()">Ingresar</button>
+
+<button onclick="login()">
+Ingresar
+</button>
+
+
+<p id="mensaje"></p>
 
 </div>
 
 
-<div class="card" id="panel" style="display:none">
+<div id="panel" class="card" style="display:none;">
 
-<h2>Bienvenido</h2>
+<h2>Panel Administrativo</h2>
 
-<p>Panel privado conectado.</p>
-
-<h3>Gestión de clientes</h3>
+<p>Bienvenido al sistema PanelStream</p>
 
 </div>
+
 
 </div>
 
 
 <script src="app.js"></script>
-
-<script>
-
-async function entrar(){
-
-const email=document.getElementById("email").value;
-const password=document.getElementById("password").value;
-
-await login(email,password);
-
-const {data}=await supabaseClient.auth.getSession();
-
-if(data.session){
-
-document.getElementById("loginBox").style.display="none";
-document.getElementById("panel").style.display="block";
-
-}
-
-}
-
-</script>
-
 
 </body>
 </html>
