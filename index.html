@@ -2,19 +2,69 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PanelStream</title>
 <link rel="stylesheet" href="style.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
+
 <body>
+
 <div class="app">
+
 <h1>PanelStream</h1>
 <p>Control de clientes, servicios y vencimientos</p>
-<div class="card">
-<h2>Proyecto base GitHub</h2>
-<p>Aquí conectaremos la base de datos en la nube.</p>
+
+<div class="card" id="loginBox">
+
+<h2>Acceso administrador</h2>
+
+<input id="email" type="email" placeholder="Correo">
+<input id="password" type="password" placeholder="Contraseña">
+
+<button onclick="entrar()">Ingresar</button>
+
 </div>
+
+
+<div class="card" id="panel" style="display:none">
+
+<h2>Bienvenido</h2>
+
+<p>Panel privado conectado.</p>
+
+<h3>Gestión de clientes</h3>
+
 </div>
+
+</div>
+
+
 <script src="app.js"></script>
+
+<script>
+
+async function entrar(){
+
+const email=document.getElementById("email").value;
+const password=document.getElementById("password").value;
+
+await login(email,password);
+
+const {data}=await supabaseClient.auth.getSession();
+
+if(data.session){
+
+document.getElementById("loginBox").style.display="none";
+document.getElementById("panel").style.display="block";
+
+}
+
+}
+
+</script>
+
+
 </body>
 </html>
