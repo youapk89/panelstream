@@ -1,59 +1,47 @@
-// PANELSTREAM SIN LOGIN
-
+// PANELSTREAM PRUEBA SUPABASE
 
 const SUPABASE_URL = "https://tmfbecurjogbafxnnql.supabase.co";
 
-
-const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRtZmJlY3VybGpvZ2JhZnhubnFsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODg5MjAzMzMsImV4cCI6MjEwNDQ5NjMzM30.jiVjxdm0AQCtmReQofkKD4n5aHU6Y84ONup6g8MuupA";
+const SUPABASE_KEY = "sb_publishable_13TqMbS-zCkJIOyVIf06xw_pUgwTGNs";
 
 
 const supabaseClient = supabase.createClient(
-SUPABASE_URL,
-SUPABASE_KEY
+    SUPABASE_URL,
+    SUPABASE_KEY
 );
 
 
-
 document.getElementById("estado").innerHTML =
-"Panel iniciado correctamente";
-
+"Panel cargado correctamente";
 
 
 async function probarConexion(){
 
+    let estado = document.getElementById("estado");
 
-const estado = document.getElementById("estado");
-
-
-estado.innerHTML="Conectando...";
+    estado.innerHTML = "Probando conexión...";
 
 
-
-const {data,error}=await supabaseClient
-.from("servicios")
-.select("*")
-.limit(5);
+    const { data, error } = await supabaseClient
+    .from("servicios")
+    .select("*");
 
 
+    if(error){
 
-if(error){
+        console.log(error);
 
+        estado.innerHTML =
+        "Error conexión: " + error.message;
 
-estado.innerHTML="Error: "+error.message;
-
-console.log(error);
-
-return;
-
-}
+        return;
+    }
 
 
-
-estado.innerHTML =
-"Supabase conectado correctamente";
+    console.log(data);
 
 
-console.log("Servicios:",data);
-
+    estado.innerHTML =
+    "Conectado a Supabase ✅<br>Total registros: " + data.length;
 
 }
