@@ -5,8 +5,9 @@ const SUPABASE_URL =
 "https://tmfbecurjogbafxnnql.supabase.co";
 
 
+// Pega aquí la clave ANON PUBLIC de Supabase
 const SUPABASE_KEY = 
-"sb_publishable_13TqMbS-zCkJIOyVIf06xw_pUgwTGNs";
+"AQUI_VA_TU_ANON_KEY";
 
 
 
@@ -38,17 +39,7 @@ async function login(){
 
 
 
-    if(!email || !password){
-
-        mensaje.innerHTML = "Complete todos los campos";
-
-        return;
-
-    }
-
-
-
-    const {data, error} = await supabaseClient.auth.signInWithPassword({
+    const { data, error } = await supabaseClient.auth.signInWithPassword({
 
         email: email,
 
@@ -62,6 +53,8 @@ async function login(){
 
         mensaje.innerHTML = error.message;
 
+        console.log(error);
+
         return;
 
     }
@@ -71,14 +64,13 @@ async function login(){
     mensaje.innerHTML = "Ingreso correcto";
 
 
-    document.querySelector(".card").style.display="none";
+    document.querySelector(".card").style.display = "none";
 
 
-    document.getElementById("panel").style.display="block";
+    document.getElementById("panel").style.display = "block";
 
 
-    console.log("Usuario conectado:", data.user);
-
+    console.log("Usuario conectado", data.user);
 
 
 }
