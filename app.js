@@ -1,4 +1,4 @@
-// PANELSTREAM PRUEBA SUPABASE
+// PANELSTREAM SIN LOGIN
 
 
 const SUPABASE_URL = "https://tmfbecurjogbafxnnql.supabase.co";
@@ -14,40 +14,34 @@ SUPABASE_KEY
 
 
 
-async function login(){
-
-
-const email = document.getElementById("email").value;
-
-const password = document.getElementById("password").value;
-
-const mensaje = document.getElementById("mensaje");
+document.getElementById("estado").innerHTML =
+"Panel iniciado correctamente";
 
 
 
-try{
+async function probarConexion(){
 
 
-mensaje.innerHTML="Probando conexión...";
+const estado = document.getElementById("estado");
 
 
+estado.innerHTML="Conectando...";
 
-// prueba directa a Supabase
+
 
 const {data,error}=await supabaseClient
 .from("servicios")
 .select("*")
-.limit(1);
+.limit(5);
 
 
 
 if(error){
 
 
+estado.innerHTML="Error: "+error.message;
+
 console.log(error);
-
-mensaje.innerHTML="ERROR: "+error.message;
-
 
 return;
 
@@ -55,22 +49,11 @@ return;
 
 
 
-mensaje.innerHTML="CONEXIÓN SUPABASE CORRECTA";
+estado.innerHTML =
+"Supabase conectado correctamente";
 
 
-console.log("Datos:",data);
-
-
-
-}catch(e){
-
-
-console.log(e);
-
-mensaje.innerHTML="Fallo conexión";
-
-
-}
+console.log("Servicios:",data);
 
 
 }
