@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,12 +9,11 @@
 
 <link rel="stylesheet" href="style.css">
 
-<!-- Librería Supabase -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
 </head>
 
+
 <body>
+
 
 <div class="app">
 
@@ -26,9 +26,18 @@
 
 <h2>Ingreso administrador</h2>
 
-<input id="email" type="email" placeholder="Correo administrador">
 
-<input id="password" type="password" placeholder="Contraseña">
+<input 
+id="email"
+type="email"
+value="josimar8999@gmail.com"
+placeholder="Correo">
+
+
+<input 
+id="password"
+type="password"
+placeholder="Contraseña">
 
 
 <button onclick="login()">
@@ -38,22 +47,19 @@ Ingresar
 
 <p id="mensaje"></p>
 
-</div>
-
-
-<div id="panel" class="card" style="display:none;">
-
-<h2>Panel Administrativo</h2>
-
-<p>Bienvenido al sistema PanelStream</p>
 
 </div>
 
 
 </div>
 
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script src="app.js"></script>
 
+
 </body>
+
 </html>
