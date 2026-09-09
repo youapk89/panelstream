@@ -24,35 +24,22 @@
 
 <div class="card">
 
-<h2>Ingreso administrador</h2>
+<h2>Panel administrador</h2>
+
+<p id="estado">
+Cargando sistema...
+</p>
 
 
-<input 
-id="email"
-type="email"
-value="josimar8999@gmail.com"
-placeholder="Correo">
-
-
-<input 
-id="password"
-type="password"
-placeholder="Contraseña">
-
-
-<button onclick="login()">
-Ingresar
+<button onclick="probarConexion()">
+Probar conexión
 </button>
 
 
-<p id="mensaje"></p>
-
-
 </div>
 
 
 </div>
-
 
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
